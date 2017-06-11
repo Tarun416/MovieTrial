@@ -1,15 +1,10 @@
 package com.example.rahul.movietrial;
 
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -22,6 +17,8 @@ public class GridImageActivity extends AppCompatActivity {
     TextView newTrailerText;
     @BindView(R.id.gridrecyclerView)
     RecyclerView gridRecyclerView;
+    @BindView(R.id.inTheatreRecyclerView)
+    RecyclerView inTheatreRecyclerView;
 
     private GridAdapter gridAdapter;
 
@@ -32,13 +29,21 @@ public class GridImageActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        setRecyclerView();
+        setNewTrailerRecyclerView();
+        setInTheatreRecyclerView();
     }
 
-    private void setRecyclerView() {
-        GridLayoutManager gridLayoutManager=new GridLayoutManager(GridImageActivity.this,2,0,false);
+    private void setInTheatreRecyclerView() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
         gridRecyclerView.setLayoutManager(gridLayoutManager);
-        gridAdapter=new GridAdapter(GridImageActivity.this);
+        gridAdapter = new GridAdapter(GridImageActivity.this);
         gridRecyclerView.setAdapter(gridAdapter);
+    }
+
+    private void setNewTrailerRecyclerView() {
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
+        inTheatreRecyclerView.setLayoutManager(gridLayoutManager);
+        gridAdapter = new GridAdapter(GridImageActivity.this);
+        inTheatreRecyclerView.setAdapter(gridAdapter);
     }
 }
