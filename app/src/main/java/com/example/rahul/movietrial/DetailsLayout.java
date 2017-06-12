@@ -37,9 +37,6 @@ public class DetailsLayout extends CoordinatorLayout {
     @BindView(R.id.headerImage)
     ImageView imageViewPlaceDetails;
 
-
-
-
     public DetailsLayout(final Context context) {
         this(context, null);
     }
@@ -57,7 +54,6 @@ public class DetailsLayout extends CoordinatorLayout {
     private void setData() {
 
     }
-
 
     public static Scene showScene(Activity activity, final ViewGroup container, final View sharedView, final String transitionName) {
         DetailsLayout detailsLayout = (DetailsLayout) activity.getLayoutInflater().inflate(R.layout.details_layout, container, false);

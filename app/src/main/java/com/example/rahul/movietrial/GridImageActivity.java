@@ -18,7 +18,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class GridImageActivity extends AppCompatActivity implements GridAdapter.OnPlaceClickListener {
+public class GridImageActivity extends AppCompatActivity implements GridAdapter.OnPlaceClickListener,HorizontalRecyclerViewScrollListener.OnItemCoverListener {
 
 
     @BindView(R.id.newTrailerText)
@@ -31,10 +31,8 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
 
     @BindView(R.id.containersLayout)
     RelativeLayout containerLayout;
-    @BindView(R.id.gridRecyclerContainer)
-    RelativeLayout gridRecyclerContainer;
-    @BindView(R.id.theatreRecycerContainer)
-    RelativeLayout theatreRecycerContainer;
+    @BindView(R.id.newInTheatresText)
+    TextView newInTheatresText;
 
 
     private Scene detailsScene;
@@ -57,15 +55,19 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
     private void setInTheatreRecyclerView() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
         inTheatreRecyclerView.setLayoutManager(gridLayoutManager);
+        inTheatreRecyclerView.setItemAnimator(new TranslateItemAnimator());
         gridTheatreAdapter = new GridTheatreAdapter(GridImageActivity.this, this);
         inTheatreRecyclerView.setAdapter(gridTheatreAdapter);
+        inTheatreRecyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(GridImageActivity.this));
     }
 
     private void setNewTrailerRecyclerView() {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
         gridRecyclerView.setLayoutManager(gridLayoutManager);
+        gridRecyclerView.setItemAnimator(new TranslateItemAnimator());
         gridAdapter = new GridAdapter(GridImageActivity.this, this);
         gridRecyclerView.setAdapter(gridAdapter);
+        gridRecyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(this));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -122,22 +124,26 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
 
 
     private void notifyLayoutAfterBackPress(final int childPosition, String transitionName) {
-        //  containerLayout.removeAllViews();
-        //  containerLayout.addView(gridRecyclerView);
+        containerLayout.removeAllViews();
+
+        containerLayout.addView(newInTheatresText);
+        containerLayout.addView(newTrailerText);
+        containerLayout.addView(gridRecyclerView);
+        containerLayout.addView(inTheatreRecyclerView);
 
         if (transitionName.startsWith("InTheatre")) {
-            theatreRecycerContainer.removeAllViews();
-            theatreRecycerContainer.addView(inTheatreRecyclerView);
+
             inTheatreRecyclerView.requestLayout();
             gridTheatreAdapter.notifyItemChanged(childPosition);
         } else {
-
-            gridRecyclerContainer.removeAllViews();
-            gridRecyclerContainer.addView(gridRecyclerView);
             gridRecyclerView.requestLayout();
             gridAdapter.notifyItemChanged(childPosition);
         }
     }
 
 
+    @Override
+    public void onItemCover(int position) {
+
+    }
 }
