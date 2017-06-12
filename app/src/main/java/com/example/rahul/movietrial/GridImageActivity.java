@@ -2,6 +2,7 @@ package com.example.rahul.movietrial;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.transition.Scene;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.rahul.movietrial.utils.TransitionUtils;
@@ -18,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-public class GridImageActivity extends AppCompatActivity implements GridAdapter.OnPlaceClickListener,HorizontalRecyclerViewScrollListener.OnItemCoverListener {
+public class GridImageActivity extends AppCompatActivity implements GridAdapter.OnPlaceClickListener, HorizontalRecyclerViewScrollListener.OnItemCoverListener {
 
 
     @BindView(R.id.newTrailerText)
@@ -33,28 +35,35 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
     RelativeLayout containerLayout;
     @BindView(R.id.newInTheatresText)
     TextView newInTheatresText;
+    @BindView(R.id.scrollView)
+    ScrollView scrollView;
+    private GridLayoutManager gridLayoutManager;
 
 
     private Scene detailsScene;
+    private Parcelable recyclerViewState;
 
     private GridAdapter gridAdapter;
     private GridTheatreAdapter gridTheatreAdapter;
+    private GridLayoutManager gridTheatreLayoutManager;
     private String currentTransitionName;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_image_container);
-
         ButterKnife.bind(this);
-
         setNewTrailerRecyclerView();
         setInTheatreRecyclerView();
     }
 
+
+
     private void setInTheatreRecyclerView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
-        inTheatreRecyclerView.setLayoutManager(gridLayoutManager);
+
+        gridTheatreLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
+        inTheatreRecyclerView.setLayoutManager(gridTheatreLayoutManager);
         inTheatreRecyclerView.setItemAnimator(new TranslateItemAnimator());
         gridTheatreAdapter = new GridTheatreAdapter(GridImageActivity.this, this);
         inTheatreRecyclerView.setAdapter(gridTheatreAdapter);
@@ -62,7 +71,7 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
     }
 
     private void setNewTrailerRecyclerView() {
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
+         gridLayoutManager = new GridLayoutManager(GridImageActivity.this, 2, 0, false);
         gridRecyclerView.setLayoutManager(gridLayoutManager);
         gridRecyclerView.setItemAnimator(new TranslateItemAnimator());
         gridAdapter = new GridAdapter(GridImageActivity.this, this);
@@ -70,11 +79,18 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         gridRecyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(this));
     }
 
+    private int firstVisiblePosition;
+    private int offsetTop;
+
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onPlaceClicked(View sharedView, String transitionName, int position) {
         currentTransitionName = transitionName;
         detailsScene = DetailsLayout.showScene(GridImageActivity.this, containerLayout, sharedView, transitionName);
+
+      offsetTop=scrollView.getScrollY();
+
+
     }
 
     @Override
@@ -86,11 +102,9 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         }
     }
 
-
     private void onBackPressedWithScene() {
         int childPosition = TransitionUtils.getItemPositionFromTransition(currentTransitionName);
         if (currentTransitionName.startsWith("InTheatre")) {
-
             DetailsLayout.hideScene(GridImageActivity.this, containerLayout, getSharedViewByPosition(childPosition, "theatre"), currentTransitionName);
         } else {
             DetailsLayout.hideScene(GridImageActivity.this, containerLayout, getSharedViewByPosition(childPosition, "notheatre"), currentTransitionName);
@@ -125,19 +139,31 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
 
     private void notifyLayoutAfterBackPress(final int childPosition, String transitionName) {
         containerLayout.removeAllViews();
-
         containerLayout.addView(newInTheatresText);
         containerLayout.addView(newTrailerText);
         containerLayout.addView(gridRecyclerView);
         containerLayout.addView(inTheatreRecyclerView);
 
-        if (transitionName.startsWith("InTheatre")) {
 
+        if (transitionName.startsWith("InTheatre")) {
             inTheatreRecyclerView.requestLayout();
+
             gridTheatreAdapter.notifyItemChanged(childPosition);
+
+//            scrollView.scrollTo(offsetTop,offsetTop);
+
+            scrollView.post(new Runnable() {
+                @Override
+                public void run() {
+                    scrollView.scrollTo(0, offsetTop);
+                }
+            });
+
+
         } else {
             gridRecyclerView.requestLayout();
             gridAdapter.notifyItemChanged(childPosition);
+
         }
     }
 
