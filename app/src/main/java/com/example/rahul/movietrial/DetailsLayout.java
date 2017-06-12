@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class DetailsLayout extends CoordinatorLayout {
 
-
-
     @BindView(R.id.rootCardView)
     RelativeLayout rootCardView;
 

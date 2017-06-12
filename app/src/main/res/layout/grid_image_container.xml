@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
-            android:text="New Trailers !"
+            android:text="New Trailers"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -29,8 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/newTrailerText"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"></android.support.v7.widget.RecyclerView>
-
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="@dimen/default_layout_margin"
+            android:layout_marginTop="8dp"
+            ></android.support.v7.widget.RecyclerView>
 
         <TextView
             android:id="@+id/newInTheatresText"
@@ -38,8 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/gridrecyclerView"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:text="In Theatres !"
+            android:text="In Theatres"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -50,8 +52,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/newInTheatresText"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"></android.support.v7.widget.RecyclerView>
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="@dimen/default_layout_margin"
+            android:layout_marginTop="8dp"></android.support.v7.widget.RecyclerView>
     </RelativeLayout>
-
 
 </ScrollView>
