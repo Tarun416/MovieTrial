@@ -13,4 +13,14 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+
+   <!-- <style name="RobotoBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="RobotoThin" parent="android:TextAppearance">
+        <item name="fontPath">fonts/Roboto-Thin.ttf</item>
+    </style>-->
+
+
 </resources>

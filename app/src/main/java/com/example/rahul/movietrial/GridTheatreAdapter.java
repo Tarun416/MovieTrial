@@ -14,33 +14,33 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by rahul on 09/06/17.
+ * Created by rahul on 12/06/17.
  */
 
-public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
+public class GridTheatreAdapter extends RecyclerView.Adapter<GridTheatreAdapter.ViewHolder> {
 
     private Context context;
-    private final OnPlaceClickListener listener;
+    private final GridAdapter.OnPlaceClickListener listener;
 
 
-    public GridAdapter(Context context,OnPlaceClickListener onPlaceClickListener) {
+    public GridTheatreAdapter(Context context, GridAdapter.OnPlaceClickListener onPlaceClickListener) {
         this.listener=onPlaceClickListener;
         this.context = context;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public GridTheatreAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.grid_images, parent, false);
-        return new ViewHolder(view);
+        return new GridTheatreAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder,final int position) {
+    public void onBindViewHolder(final GridTheatreAdapter.ViewHolder holder, final int position) {
         holder.gridImage.setImageResource(R.drawable.mark);
         holder.rootId.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                listener.onPlaceClicked(holder.rootId, TransitionUtils.getRecyclerViewTransitionName(position), position);
+                listener.onPlaceClicked(holder.rootId, "InTheatre"+TransitionUtils.getRecyclerViewTransitionName(position), position);
             }
         });
     }

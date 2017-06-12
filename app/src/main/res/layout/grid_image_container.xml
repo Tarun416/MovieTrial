@@ -8,7 +8,8 @@
     android:layout_height="match_parent">
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/containersLayout">
 
     <TextView
         android:id="@+id/newTrailerText"
@@ -22,12 +23,21 @@
         android:layout_marginTop="16dp"/>
 
 
+    <RelativeLayout
+        android:id="@+id/gridRecyclerContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newTrailerText">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/gridrecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/newTrailerText"></android.support.v7.widget.RecyclerView>
+        ></android.support.v7.widget.RecyclerView>
+
+
+    </RelativeLayout>
 
 
     <TextView
@@ -37,10 +47,17 @@
         android:text="In Theatres !"
         android:layout_marginLeft="16dp"
         android:textStyle="bold"
-        android:layout_below="@+id/gridrecyclerView"
+        android:layout_below="@+id/gridRecyclerContainer"
         android:textSize="18sp"
         android:textColor="@android:color/white"
         android:layout_marginTop="16dp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/theatreRecycerContainer"
+        android:layout_width="wrap_content"
+        android:layout_below="@+id/newInTheatresText"
+        android:layout_height="wrap_content">
 
 
     <android.support.v7.widget.RecyclerView
@@ -48,8 +65,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_below="@+id/newInTheatresText"></android.support.v7.widget.RecyclerView>
+        ></android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+
 
 
 </RelativeLayout>
+
+
+
 </ScrollView>
