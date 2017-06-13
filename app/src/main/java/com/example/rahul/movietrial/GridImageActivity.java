@@ -57,7 +57,6 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.grid_image_container);
         ButterKnife.bind(this);
-
         spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         setNewTrailerRecyclerView();
         setInTheatreRecyclerView();
@@ -93,7 +92,6 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         currentTransitionName = transitionName;
         detailsScene = DetailsLayout.showScene(GridImageActivity.this, containerLayout, sharedView, transitionName);
         offsetTop = scrollView.getScrollY();
-
 
     }
 
@@ -151,16 +149,13 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
 
         if (transitionName.startsWith("InTheatre")) {
             inTheatreRecyclerView.requestLayout();
-
             gridTheatreAdapter.notifyItemChanged(childPosition);
-
             scrollView.post(new Runnable() {
                 @Override
                 public void run() {
                     scrollView.scrollTo(0, offsetTop);
                 }
             });
-
 
         } else {
             gridRecyclerView.requestLayout();

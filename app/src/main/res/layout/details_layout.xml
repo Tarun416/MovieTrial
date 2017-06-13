@@ -4,8 +4,14 @@
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="@dimen/activity_horizontal_margin"
-    android:fitsSystemWindows="true">
+    android:layout_marginTop="8dp"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/transparent"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <RelativeLayout
         android:id="@+id/rootCardView"
@@ -31,7 +37,7 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cardView"
             android:paddingLeft="@dimen/default_layout_margin"
@@ -51,20 +57,36 @@
             android:paddingLeft="@dimen/default_layout_margin"
             android:paddingRight="@dimen/default_layout_margin"
             android:paddingTop="8dp"
-            android:text="1HR 35 MIN"
+            android:textSize="18sp"
+            android:text="1Hour 35 minute"
             android:textColor="@android:color/black" />
 
+
+        <TextView
+            android:id="@+id/starCastText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/movieLimit"
+            android:paddingLeft="@dimen/default_layout_margin"
+            android:textStyle="normal"
+            android:paddingTop="8dp"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:text="Star cast : "/>
 
         <TextView
             android:id="@+id/starCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movieLimit"
-            android:paddingLeft="@dimen/default_layout_margin"
+            android:paddingLeft="8dp"
             android:paddingRight="@dimen/default_layout_margin"
             android:paddingTop="8dp"
-            android:text="Tom Cruise, Angelina Jolie"
-            android:textColor="@android:color/black" />
+            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:layout_toRightOf="@+id/starCastText"
+            android:text="Tom Cruise, Angelina Jolie, Brad Pitt"
+            />
 
 
         <TextView
@@ -72,14 +94,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/starCast"
-            android:ellipsize="end"
-            android:maxLines="3"
+            android:textSize="18sp"
             android:padding="@dimen/default_layout_margin"
-            android:text="nice movie. Go and watch . If you don't watch its your loss."
-
+            android:text="Nice movie. Go and watch . If you dont watch its your loss. People rated it 5 star. thats not our problem."
             android:textColor="@android:color/black" />
 
-    </RelativeLayout>
 
+
+        <TextView
+            android:id="@+id/trailerText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/default_layout_margin"
+            android:layout_below="@+id/description"
+            android:textSize="22sp"
+            android:textColor="@color/title"
+            android:textStyle="bold"
+
+            android:text="Trailers"/>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trailerRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/default_layout_margin"
+            android:layout_marginBottom="@dimen/default_layout_margin"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_below="@id/trailerText"></android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
 
 </com.example.rahul.movietrial.DetailsLayout>

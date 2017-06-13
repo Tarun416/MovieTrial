@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.transition.Scene;
 import android.transition.TransitionManager;
 import android.transition.TransitionSet;
@@ -22,10 +24,10 @@ import butterknife.ButterKnife;
  * Created by rahul on 12/06/17.
  */
 
-
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class DetailsLayout extends CoordinatorLayout {
 
+    private static int spacingInPixels;
     @BindView(R.id.rootCardView)
     RelativeLayout rootCardView;
 
@@ -34,6 +36,12 @@ public class DetailsLayout extends CoordinatorLayout {
 
     @BindView(R.id.headerImage)
     ImageView imageViewPlaceDetails;
+    @BindView(R.id.trailerRecyclerView)
+    RecyclerView trailerRecyclerView;
+
+    private LinearLayoutManager linearLayoutManager;
+
+    private TrailerAdapter trailerAdapter;
 
     public DetailsLayout(final Context context) {
         this(context, null);
@@ -47,6 +55,18 @@ public class DetailsLayout extends CoordinatorLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
+
+        setRecyclerView();
+    }
+
+    private void setRecyclerView() {
+        linearLayoutManager=new LinearLayoutManager(getContext());
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        trailerRecyclerView.setLayoutManager(linearLayoutManager);
+        trailerRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        trailerAdapter=new TrailerAdapter(getContext());
+        trailerRecyclerView.setAdapter(trailerAdapter);
+
     }
 
     private void setData() {
@@ -54,6 +74,7 @@ public class DetailsLayout extends CoordinatorLayout {
     }
 
     public static Scene showScene(Activity activity, final ViewGroup container, final View sharedView, final String transitionName) {
+        spacingInPixels = activity.getResources().getDimensionPixelSize(R.dimen.spacing);
         DetailsLayout detailsLayout = (DetailsLayout) activity.getLayoutInflater().inflate(R.layout.details_layout, container, false);
         //   detailsLayout.setData(data);
         TransitionSet set = new ShowDetailsTransitionSet(activity, transitionName, sharedView, detailsLayout);
