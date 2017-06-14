@@ -28,7 +28,7 @@ public class ShowDetailsTransitionSet extends TransitionSet {
         this.from = from;
         this.to = to;
         addTransition(textResize());
-        addTransition(slide());
+      //  addTransition(slide());
         addTransition(shared());
     }
 

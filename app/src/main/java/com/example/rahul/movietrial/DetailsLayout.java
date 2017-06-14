@@ -117,7 +117,7 @@ public class DetailsLayout extends CoordinatorLayout {
 
 
     private void setToolbar() {
-        collapsingToolbar.setContentScrimColor(ContextCompat.getColor(getContext(),R.color.black));
+        collapsingToolbar.setContentScrimColor(ContextCompat.getColor(getContext(),R.color.darkbluebg));
         collapsingToolbar.setTitle("Movie Details");
         collapsingToolbar.setCollapsedTitleTextAppearance(R.style.CollapsedToolbar);
         collapsingToolbar.setExpandedTitleTextAppearance(R.style.ExpandedToolbar);
