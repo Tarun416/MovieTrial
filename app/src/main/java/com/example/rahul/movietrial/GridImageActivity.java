@@ -2,12 +2,12 @@ package com.example.rahul.movietrial;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SnapHelper;
 import android.transition.Scene;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -42,14 +42,19 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
     @BindView(R.id.scrollView)
     ScrollView scrollView;
 
+    @BindView(R.id.innerContainerLayout)
+    RelativeLayout innerContainerLayout;
+
     private GridLayoutManager gridLayoutManager;
     private GridLayoutManager gridTheatreLayoutManager;
     private Scene detailsScene;
     private GridAdapter gridAdapter;
     private GridTheatreAdapter gridTheatreAdapter;
-
     private String currentTransitionName;
     private int spacingInPixels;
+    private SnapHelper snapHelper1;
+    private SnapHelper snapHelper2;
+
 
 
     @Override
@@ -58,6 +63,8 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         setContentView(R.layout.grid_image_container);
         ButterKnife.bind(this);
         spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+        snapHelper1=new StartSnapHelper();
+        snapHelper2=new StartSnapHelper();
         setNewTrailerRecyclerView();
         setInTheatreRecyclerView();
     }
@@ -69,9 +76,9 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         inTheatreRecyclerView.setLayoutManager(gridTheatreLayoutManager);
         inTheatreRecyclerView.setItemAnimator(new TranslateItemAnimator());
         inTheatreRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        snapHelper1.attachToRecyclerView(inTheatreRecyclerView);
         gridTheatreAdapter = new GridTheatreAdapter(GridImageActivity.this, this);
         inTheatreRecyclerView.setAdapter(gridTheatreAdapter);
-      //  inTheatreRecyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(GridImageActivity.this));
     }
 
     private void setNewTrailerRecyclerView() {
@@ -79,9 +86,9 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
         gridRecyclerView.setLayoutManager(gridLayoutManager);
         gridRecyclerView.setItemAnimator(new TranslateItemAnimator());
         gridRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        snapHelper2.attachToRecyclerView(gridRecyclerView);
         gridAdapter = new GridAdapter(GridImageActivity.this, this);
         gridRecyclerView.setAdapter(gridAdapter);
-       // gridRecyclerView.addOnScrollListener(new HorizontalRecyclerViewScrollListener(this));
     }
 
     private int offsetTop;
@@ -141,25 +148,29 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
 
     private void notifyLayoutAfterBackPress(final int childPosition, String transitionName) {
         containerLayout.removeAllViews();
-        containerLayout.addView(newInTheatresText);
-        containerLayout.addView(newTrailerText);
-        containerLayout.addView(gridRecyclerView);
-        containerLayout.addView(inTheatreRecyclerView);
+
+        containerLayout.addView(scrollView);
+//        scrollView.addView(innerContainerLayout);
+        /*innerContainerLayout.addView(newInTheatresText);
+        innerContainerLayout.addView(newTrailerText);
+        innerContainerLayout.addView(gridRecyclerView);
+        innerContainerLayout.addView(inTheatreRecyclerView);*/
 
 
         if (transitionName.startsWith("InTheatre")) {
             inTheatreRecyclerView.requestLayout();
-            gridTheatreAdapter.notifyItemChanged(childPosition);
+
             scrollView.post(new Runnable() {
                 @Override
                 public void run() {
                     scrollView.scrollTo(0, offsetTop);
                 }
             });
+            gridTheatreAdapter.notifyItemChanged(childPosition);
 
         } else {
             gridRecyclerView.requestLayout();
-            gridAdapter.notifyItemChanged(childPosition);
+
 
             scrollView.post(new Runnable() {
                 @Override
@@ -167,6 +178,7 @@ public class GridImageActivity extends AppCompatActivity implements GridAdapter.
                     scrollView.scrollTo(0, offsetTop);
                 }
             });
+            gridAdapter.notifyItemChanged(childPosition);
 
         }
     }
