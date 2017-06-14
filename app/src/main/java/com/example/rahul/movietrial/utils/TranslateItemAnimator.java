@@ -1,7 +1,9 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+
+import com.example.rahul.movietrial.utils.BaseItemAnimator;
 
 public class TranslateItemAnimator extends BaseItemAnimator {
 

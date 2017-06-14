@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;

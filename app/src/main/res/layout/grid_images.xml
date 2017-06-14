@@ -5,22 +5,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootId"
     android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_marginTop="8dp"
-    android:background="@android:color/transparent"
-    android:layout_height="wrap_content">
+    android:background="@android:color/transparent">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:id="@+id/card_view"
         android:layout_width="170dp"
         android:layout_height="170dp"
-        card_view:cardCornerRadius="8dp">
+        card_view:cardCornerRadius="@dimen/default_layout_margin_halved">
 
         <ImageView
             android:id="@+id/gridImage"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:src="@drawable/mark"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            tools:src="@drawable/mark" />
 
     </android.support.v7.widget.CardView>
 
@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/card_view"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/default_layout_margin_halved"
         android:text="Henry Cooper"
         android:textColor="@android:color/black"
         android:textSize="14sp" />

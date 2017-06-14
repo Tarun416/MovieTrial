@@ -64,6 +64,7 @@
         android:id="@+id/rootCardView"
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
+        android:layout_marginTop="@dimen/default_layout_margin"
         android:layout_height="match_parent"
         >
 
@@ -87,7 +88,7 @@
             android:layout_below="@+id/title"
             android:paddingLeft="@dimen/default_layout_margin"
             android:paddingRight="@dimen/default_layout_margin"
-            android:paddingTop="8dp"
+            android:paddingTop="@dimen/default_layout_margin_halved"
             android:textSize="18sp"
             android:text="1Hour 35 minute"
             android:textColor="@android:color/black" />
@@ -100,7 +101,7 @@
             android:layout_below="@+id/movieLimit"
             android:paddingLeft="@dimen/default_layout_margin"
             android:textStyle="normal"
-            android:paddingTop="8dp"
+            android:paddingTop="@dimen/default_layout_margin_halved"
             android:textSize="18sp"
             android:textColor="@android:color/black"
             android:text="Star cast : "/>
@@ -110,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/movieLimit"
-            android:paddingLeft="8dp"
+            android:paddingLeft="@dimen/default_layout_margin_halved"
             android:paddingRight="@dimen/default_layout_margin"
             android:paddingTop="8dp"
             android:textSize="18sp"
@@ -151,8 +152,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/default_layout_margin"
             android:layout_marginBottom="@dimen/default_layout_margin"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="@dimen/default_layout_margin_halved"
+            android:layout_marginRight="@dimen/default_layout_margin_halved"
             android:layout_below="@id/trailerText"></android.support.v7.widget.RecyclerView>
 
     </RelativeLayout>

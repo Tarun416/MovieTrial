@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 import android.support.v4.view.ViewCompat;
 import android.view.View;

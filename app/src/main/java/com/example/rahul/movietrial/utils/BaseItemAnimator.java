@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 /**
  * Created by droids on 08.08.2016.
@@ -30,6 +30,7 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;

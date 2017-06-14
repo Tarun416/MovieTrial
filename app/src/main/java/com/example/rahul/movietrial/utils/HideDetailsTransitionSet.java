@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.utils;
 
 import android.content.Context;
 import android.os.Build;
@@ -8,8 +8,11 @@ import android.transition.TransitionInflater;
 import android.transition.TransitionSet;
 import android.view.View;
 
+import com.example.rahul.movietrial.DetailsLayout;
+import com.example.rahul.movietrial.R;
+
 @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-class ShowDetailsTransitionSet extends TransitionSet {
+public class HideDetailsTransitionSet extends TransitionSet {
     private static final String TITLE_TEXT_VIEW_TRANSITION_NAME = "titleTextView";
     private static final String CARD_VIEW_TRANSITION_NAME = "cardView";
     private final String transitionName;
@@ -17,13 +20,12 @@ class ShowDetailsTransitionSet extends TransitionSet {
     private final DetailsLayout to;
     private final Context context;
 
-    ShowDetailsTransitionSet(final Context ctx, final String transitionName, final View from, final DetailsLayout to) {
+    public HideDetailsTransitionSet(final Context ctx, final String transitionName, final View from, final DetailsLayout to) {
         context = ctx;
         this.transitionName = transitionName;
         this.from = from;
         this.to = to;
         addTransition(textResize());
-        addTransition(slide());
         addTransition(shared());
     }
 
@@ -41,13 +43,6 @@ class ShowDetailsTransitionSet extends TransitionSet {
                 .build();
     }
 
-    private Transition slide() {
-        return new TransitionBuilder(TransitionInflater.from(context).inflateTransition(R.transition.bali_details_enter_transition))
-                .excludeTarget(transitionName, true)
-                .excludeTarget(to.textViewTitle, true)
-                .excludeTarget(to.rootCardView, true)
-                .build();
-    }
 
     private Transition shared() {
         return new TransitionBuilder(TransitionInflater.from(context).inflateTransition(android.R.transition.move))

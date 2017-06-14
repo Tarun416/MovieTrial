@@ -4,13 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +22,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.rahul.movietrial.adapters.TrailerAdapter;
+import com.example.rahul.movietrial.utils.HideDetailsTransitionSet;
+import com.example.rahul.movietrial.utils.ShowDetailsTransitionSet;
+import com.example.rahul.movietrial.utils.SpacesItemDecoration;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -36,17 +39,16 @@ public class DetailsLayout extends CoordinatorLayout {
 
     private static int spacingInPixels;
     @BindView(R.id.rootCardView)
-    RelativeLayout rootCardView;
+   public RelativeLayout rootCardView;
 
     @BindView(R.id.title)
-    TextView textViewTitle;
+   public TextView textViewTitle;
 
     @BindView(R.id.headerImage)
-    ImageView imageViewPlaceDetails;
+    public ImageView imageViewPlaceDetails;
     @BindView(R.id.trailerRecyclerView)
     RecyclerView trailerRecyclerView;
-   /* @BindView(R.id.cardView)
-    CardView cardView;*/
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
     @BindView(R.id.collapsing_toolbar)
@@ -131,7 +133,6 @@ public class DetailsLayout extends CoordinatorLayout {
         } else {
             // Don't inflate. Tablet is in landscape mode.
         }
-
 
 
         toolbar.setNavigationOnClickListener(new OnClickListener() {

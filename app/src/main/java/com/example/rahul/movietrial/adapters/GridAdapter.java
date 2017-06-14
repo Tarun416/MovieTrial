@@ -1,4 +1,4 @@
-package com.example.rahul.movietrial;
+package com.example.rahul.movietrial.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.rahul.movietrial.R;
 import com.example.rahul.movietrial.utils.TransitionUtils;
 
 import butterknife.BindView;
@@ -21,7 +22,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
 
     private Context context;
     private final OnPlaceClickListener listener;
-
 
     public GridAdapter(Context context,OnPlaceClickListener onPlaceClickListener) {
         this.listener=onPlaceClickListener;
@@ -51,7 +51,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     }
 
 
-    interface OnPlaceClickListener {
+   public  interface OnPlaceClickListener {
         void onPlaceClicked(View sharedView, String transitionName, final int position);
     }
 
